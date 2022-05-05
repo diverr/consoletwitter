@@ -5,13 +5,11 @@ import java.time.LocalDateTime;
 public class Message {
     private final String owner;
     private final String message;
-    private final String createdBy;
     private final LocalDateTime time;
 
-    public Message(String owner, String message, String createdBy) {
+    public Message(String owner, String message) {
         this.owner = owner;
         this.message = message;
-        this.createdBy = createdBy;
         this.time = LocalDateTime.now();
     }
 
@@ -21,10 +19,6 @@ public class Message {
 
     public String getMessage() {
         return message;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
     }
 
     public LocalDateTime getTime() {

@@ -7,5 +7,5 @@ public interface MessageService {
 
     List<Message> getUserWall(String userName);
 
-    void addMessage(Message message);
+    void addMessage(String owner, String text);
 }

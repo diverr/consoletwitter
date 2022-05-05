@@ -1,6 +1,7 @@
 package lookiero.message;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,7 +14,10 @@ public class MessageRepositoryImpl implements MessageRepository {
     }
 
     @Override
-    public List<Message> getMessagesByUser(String userName) {
-        return messages.stream().filter(message -> message.getOwner().equals(userName)).collect(Collectors.toList());
+    public List<Message> getMessagesByOwnerIn(List<String> owners) {
+        return messages.stream()
+                .filter(message -> owners.contains(message.getOwner()))
+                .sorted(Comparator.comparing(Message::getTime).reversed())
+                .collect(Collectors.toList());
     }
 }
