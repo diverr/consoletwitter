@@ -12,7 +12,7 @@ public class StringUtils {
     }
 
     public static String parseWallMessage(Message message) {
-        return String.format("%s: %s", message.getOwner(), parseMessage(message));
+        return String.format("%s - %s", message.getOwner(), parseMessage(message));
     }
 
     public static String prettyTime(LocalDateTime time) {

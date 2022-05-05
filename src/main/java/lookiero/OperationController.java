@@ -12,7 +12,7 @@ public class OperationController {
 
     private final String STRING_POST = " -> ";
     private final String STRING_FOLLOWS = " follows ";
-    private final String STRING_WALL = " wall ";
+    private final String STRING_WALL = " wall";
 
     public OperationController(MessageService messageService, UserService userService, IO io) {
         this.messageService = messageService;
@@ -59,6 +59,7 @@ public class OperationController {
 
         try {
             userService.followUser(userName, followUserName);
+            io.writeLine(String.format("%s is now following %s", userName, followUserName));
         } catch (Exception e) {
             io.writeLine(e.getMessage());
         }
