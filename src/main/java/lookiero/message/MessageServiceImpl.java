@@ -22,7 +22,7 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public List<Message> getUserWall(String userName) {
-        User user = userRepository.getUserByName(userName).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        User user = userRepository.findByName(userName).orElseThrow(() -> new IllegalArgumentException("User not found"));
 
         List<String> users = user.getSubscriptions();
         users.add(user.getName());
@@ -31,8 +31,8 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public void addMessage(String owner, String text) {
-        User user = userRepository.getUserByName(owner).orElse(null);
+    public void postMessage(String owner, String text) {
+        User user = userRepository.findByName(owner).orElse(null);
         if (user == null) {
             userRepository.addUser(new User(owner, new ArrayList<>()));
         }
