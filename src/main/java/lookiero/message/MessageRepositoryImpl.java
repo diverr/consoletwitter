@@ -16,7 +16,7 @@ public class MessageRepositoryImpl implements MessageRepository {
     @Override
     public List<Message> getMessagesByOwnerIn(List<String> owners) {
         return messages.stream()
-                .filter(message -> owners.contains(message.getOwner()))
+                .filter(message -> owners.stream().anyMatch(message.getOwner()::equalsIgnoreCase))
                 .sorted(Comparator.comparing(Message::getTime).reversed())
                 .collect(Collectors.toList());
     }

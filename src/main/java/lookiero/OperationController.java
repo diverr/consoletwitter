@@ -10,6 +10,10 @@ public class OperationController {
     private final UserService userService;
     private final IO io;
 
+    private final String STRING_POST = " -> ";
+    private final String STRING_FOLLOWS = " follows ";
+    private final String STRING_WALL = " wall ";
+
     public OperationController(MessageService messageService, UserService userService, IO io) {
         this.messageService = messageService;
         this.userService = userService;
@@ -20,11 +24,11 @@ public class OperationController {
         String text = io.readLine();
 
         // replace for regular expressions
-        if (text.contains(" -> ")) {
+        if (text.contains(STRING_POST)) {
             postCommand(text);
-        } else if (text.contains(" follows ")) {
+        } else if (text.contains(STRING_FOLLOWS)) {
             followCommand(text);
-        } else if (text.contains(" wall")) {
+        } else if (text.contains(STRING_WALL)) {
             wallCommand(text);
         } else {
             readCommand(text);
@@ -50,8 +54,8 @@ public class OperationController {
     }
 
     private void followCommand(String text) {
-        String userName = text.split(" follows ")[0];
-        String followUserName = text.split(" follows ")[1];
+        String userName = text.split(STRING_FOLLOWS)[0];
+        String followUserName = text.split(STRING_FOLLOWS)[1];
 
         try {
             userService.followUser(userName, followUserName);
@@ -61,8 +65,8 @@ public class OperationController {
     }
 
     private void postCommand(String text) {
-        String userName = text.split(" -> ")[0];
-        String message = text.split(" -> ")[1];
+        String userName = text.split(STRING_POST)[0];
+        String message = text.split(STRING_POST)[1];
 
         try {
             messageService.postMessage(userName, message);
