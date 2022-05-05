@@ -1,8 +1,8 @@
 package lookiero;
 
-import lookiero.message.Message;
 import lookiero.message.MessageService;
 import lookiero.user.UserService;
+import lookiero.utils.StringUtils;
 import lookiero.views.IO;
 
 public class OperationController {
@@ -33,7 +33,7 @@ public class OperationController {
 
     private void readCommand(String text) {
         try {
-            messageService.getUserMessages(text).forEach(message -> io.writeLine(parseMessage(message)));
+            messageService.getUserMessages(text).forEach(message -> io.writeLine(StringUtils.parseMessage(message)));
         } catch (Exception e) {
             io.writeLine(e.getMessage());
         }
@@ -43,7 +43,7 @@ public class OperationController {
         String userName = text.split(" ")[0];
 
         try {
-            messageService.getUserWall(userName).forEach(message -> io.writeLine(parseWallMessage(message)));
+            messageService.getUserWall(userName).forEach(message -> io.writeLine(StringUtils.parseWallMessage(message)));
         } catch (Exception e) {
             io.writeLine(e.getMessage());
         }
@@ -71,11 +71,4 @@ public class OperationController {
         }
     }
 
-    private String parseMessage(Message message) {
-        return String.format("%s (%s)", message.getMessage(), message.getTime());
-    }
-
-    private String parseWallMessage(Message message) {
-        return String.format("%s: %s", message.getOwner(), parseMessage(message));
-    }
 }
