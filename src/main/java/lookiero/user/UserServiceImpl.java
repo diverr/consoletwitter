@@ -11,6 +11,8 @@ public class UserServiceImpl implements UserService {
     public void followUser(String userName, String followUserName) {
         User user = userRepository.findByName(userName).orElseThrow(() -> new RuntimeException(String.format("User %s not found", userName)));
 
+        userRepository.findByName(followUserName).orElseThrow(() -> new RuntimeException(String.format("User %s not found", followUserName)));
+
         if (user.getSubscriptions().contains(followUserName)) {
             throw new RuntimeException(String.format("User %s already follows %s", userName, followUserName));
         } else {

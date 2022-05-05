@@ -8,22 +8,43 @@ import lookiero.user.UserRepository;
 import lookiero.user.UserRepositoryImpl;
 import lookiero.user.UserService;
 import lookiero.user.UserServiceImpl;
-import lookiero.views.ConsoleView;
-import lookiero.views.View;
+import lookiero.views.ConsoleIO;
+import lookiero.views.IO;
 
 public class Lookiero {
-    public static void main(String[] args) {
+    MessageRepository messageRepository;
+    UserRepository userRepository;
+    MessageService messageService;
+    UserService userService;
+    IO io;
 
+    public Lookiero(MessageRepository messageRepository, UserRepository userRepository, MessageService messageService, UserService userService, IO io) {
+        this.messageRepository = messageRepository;
+        this.userRepository = userRepository;
+        this.messageService = messageService;
+        this.userService = userService;
+        this.io = io;
+    }
+
+    public static void main(String[] args) {
         MessageRepository messageRepository = new MessageRepositoryImpl();
         UserRepository userRepository = new UserRepositoryImpl();
 
         MessageService messageService = new MessageServiceImpl(messageRepository, userRepository);
         UserService userService = new UserServiceImpl(userRepository);
 
-        View console = new ConsoleView(messageService, userService);
+        IO io = new ConsoleIO();
+
+        new Lookiero(messageRepository, userRepository, messageService, userService, io).init();
+    }
+
+    public void init() {
+        OperationController operation = new OperationController(messageService, userService, io);
 
         while (true) {
-            console.process();
+            operation.run();
         }
     }
+
+
 }

@@ -1,24 +1,23 @@
-package lookiero.views;
+package lookiero;
 
 import lookiero.message.Message;
 import lookiero.message.MessageService;
 import lookiero.user.UserService;
+import lookiero.views.IO;
 
-import java.util.Scanner;
-
-public class ConsoleView implements View {
-    private final Scanner scanner;
+public class OperationController {
     private final MessageService messageService;
     private final UserService userService;
+    private final IO io;
 
-    public ConsoleView(MessageService messageService, UserService userService) {
+    public OperationController(MessageService messageService, UserService userService, IO io) {
         this.messageService = messageService;
         this.userService = userService;
-        scanner = new Scanner(System.in);
+        this.io = io;
     }
 
-    public void process() {
-        String text = scanner.nextLine();
+    public void run() {
+        String text = io.readLine();
 
         // replace for regular expressions
         if (text.contains(" -> ")) {
@@ -34,9 +33,9 @@ public class ConsoleView implements View {
 
     private void readCommand(String text) {
         try {
-            messageService.getUserMessages(text).forEach(message -> write(parseMessage(message)));
+            messageService.getUserMessages(text).forEach(message -> io.writeLine(parseMessage(message)));
         } catch (Exception e) {
-            write(e.getMessage());
+            io.writeLine(e.getMessage());
         }
     }
 
@@ -44,9 +43,9 @@ public class ConsoleView implements View {
         String userName = text.split(" ")[0];
 
         try {
-            messageService.getUserWall(userName).forEach(message -> write(parseWallMessage(message)));
+            messageService.getUserWall(userName).forEach(message -> io.writeLine(parseWallMessage(message)));
         } catch (Exception e) {
-            write(e.getMessage());
+            io.writeLine(e.getMessage());
         }
     }
 
@@ -57,7 +56,7 @@ public class ConsoleView implements View {
         try {
             userService.followUser(userName, followUserName);
         } catch (Exception e) {
-            write(e.getMessage());
+            io.writeLine(e.getMessage());
         }
     }
 
@@ -68,12 +67,8 @@ public class ConsoleView implements View {
         try {
             messageService.postMessage(userName, message);
         } catch (Exception e) {
-            write(e.getMessage());
+            io.writeLine(e.getMessage());
         }
-    }
-
-    private void write(String message) {
-        System.out.println(message);
     }
 
     private String parseMessage(Message message) {
@@ -83,5 +78,4 @@ public class ConsoleView implements View {
     private String parseWallMessage(Message message) {
         return String.format("%s: %s", message.getOwner(), parseMessage(message));
     }
-
 }
