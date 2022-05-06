@@ -13,6 +13,12 @@ public class ConsoleIO implements IO {
     }
 
     @Override
+    public void stop() {
+        System.out.println("Bye!");
+        scanner.close();
+    }
+
+    @Override
     public String readLine() {
         return scanner.nextLine();
     }

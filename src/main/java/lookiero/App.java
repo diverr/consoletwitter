@@ -42,8 +42,8 @@ public class App {
 
         operation.wellcome();
 
-        while (true) {
-            operation.run();
+        while (operation.isRunning()) {
+            operation.go();
         }
 
     }
