@@ -43,7 +43,7 @@ public class App {
         operation.wellcome();
 
         while (operation.isRunning()) {
-            operation.go();
+            operation.listen();
         }
 
     }

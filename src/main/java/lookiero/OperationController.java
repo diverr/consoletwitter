@@ -26,7 +26,7 @@ public class OperationController {
         running = true;
     }
 
-    public void go() {
+    public void listen() {
         io.start();
         String text = io.readLine();
 
@@ -36,11 +36,15 @@ public class OperationController {
             followCommand(text);
         } else if (isWallCommand(text)) {
             wallCommand(text);
-        } else if (text.equalsIgnoreCase(STRING_COMMAND_QUIT)) {
+        } else if (isExitCommand(text)) {
             exitCommand();
         } else {
             readCommand(text);
         }
+    }
+
+    private boolean isExitCommand(String text) {
+        return text.equals(STRING_COMMAND_QUIT);
     }
 
     private boolean isPostCommand(String text) {
