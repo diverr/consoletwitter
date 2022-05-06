@@ -85,7 +85,7 @@ class OperationControllerTest {
     @DisplayName("Should write welcome message")
     void welcome() {
         operationController.welcome();
-        verify(io).writeLine("Welcome to Lookiero! (type 'q' to quit)");
+        verify(io).writeLine("Welcome to ConsoleTwitter! (type 'q' to quit)");
     }
 
 }

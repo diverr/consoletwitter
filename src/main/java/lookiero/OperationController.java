@@ -109,7 +109,7 @@ public class OperationController {
     }
 
     public void welcome() {
-        io.writeLine("Welcome to Lookiero! (type 'q' to quit)");
+        io.writeLine("Welcome to ConsoleTwitter! (type 'q' to quit)");
     }
 
     public boolean isRunning() {
