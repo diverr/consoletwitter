@@ -47,7 +47,7 @@ class AppTest {
         when(operationController.isRunning()).thenReturn(true).thenReturn(false);
         app.init(operationController);
 
-        verify(operationController).wellcome();
+        verify(operationController).welcome();
         verify(operationController, times(2)).isRunning();
         verify(operationController, times(1)).listen();
     }

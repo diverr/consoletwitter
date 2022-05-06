@@ -108,7 +108,7 @@ public class OperationController {
         }
     }
 
-    public void wellcome() {
+    public void welcome() {
         io.writeLine("Welcome to Lookiero!");
     }
 

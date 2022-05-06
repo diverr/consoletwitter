@@ -41,7 +41,7 @@ public class App {
     }
 
     public void init(OperationController operation) {
-        operation.wellcome();
+        operation.welcome();
 
         while (operation.isRunning()) {
             operation.listen();
