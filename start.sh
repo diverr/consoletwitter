@@ -6,14 +6,15 @@ select opt in "${options[@]}"
 do
     case $opt in
         "Build project")
-            ./gradlew build
+            ./gradlew shadowJar
             ;;
         "Execute project")
+            clear
             java -jar ./build/libs/lookiero-1.0-SNAPSHOT-all.jar
             break
             ;;
         "Tests")
-            ./gradlew test --info --stacktrace
+            ./gradlew test
             ;;
         "Quit")
             break
