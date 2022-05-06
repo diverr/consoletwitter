@@ -3,7 +3,6 @@ package lookiero;
 import lookiero.message.MessageService;
 import lookiero.user.UserService;
 import lookiero.utils.StringUtils;
-import lookiero.views.IO;
 
 public class OperationController {
     private final MessageService messageService;
@@ -21,6 +20,7 @@ public class OperationController {
     }
 
     public void run() {
+        io.start();
         String text = io.readLine();
 
         // replace for regular expressions
@@ -74,6 +74,10 @@ public class OperationController {
         } catch (Exception e) {
             io.writeLine(e.getMessage());
         }
+    }
+
+    public void wellcome() {
+        io.writeLine("Welcome to Lookiero!");
     }
 
 }

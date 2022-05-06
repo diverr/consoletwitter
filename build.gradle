@@ -18,7 +18,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'lookiero.Lookiero'
+    mainClass = 'lookiero.App'
 }
 
 test {

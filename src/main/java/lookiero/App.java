@@ -9,16 +9,15 @@ import lookiero.user.UserRepositoryImpl;
 import lookiero.user.UserService;
 import lookiero.user.UserServiceImpl;
 import lookiero.views.ConsoleIO;
-import lookiero.views.IO;
 
-public class Lookiero {
+public class App {
     MessageRepository messageRepository;
     UserRepository userRepository;
     MessageService messageService;
     UserService userService;
     IO io;
 
-    public Lookiero(MessageRepository messageRepository, UserRepository userRepository, MessageService messageService, UserService userService, IO io) {
+    public App(MessageRepository messageRepository, UserRepository userRepository, MessageService messageService, UserService userService, IO io) {
         this.messageRepository = messageRepository;
         this.userRepository = userRepository;
         this.messageService = messageService;
@@ -35,15 +34,18 @@ public class Lookiero {
 
         IO io = new ConsoleIO();
 
-        new Lookiero(messageRepository, userRepository, messageService, userService, io).init();
+        new App(messageRepository, userRepository, messageService, userService, io).init();
     }
 
     public void init() {
         OperationController operation = new OperationController(messageService, userService, io);
 
+        operation.wellcome();
+
         while (true) {
             operation.run();
         }
+
     }
 
 
