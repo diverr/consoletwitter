@@ -1,16 +1,21 @@
 #!/bin/bash
 
 PS3='Please enter your choice: '
-options=("Build project" "Execute project" "Tests" "Quit")
+options=("Execute local project" "Execute in Docker" "Tests" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
-        "Build project")
-            ./gradlew shadowJar
-            ;;
-        "Execute project")
+        "Execute local project")
             clear
+            ./gradlew shadowJar
             java -jar ./build/libs/lookiero-1.0-SNAPSHOT-all.jar
+            break
+            ;;
+        "Execute in Docker")
+            clear
+            echo "Executing in openjdk:11 docker image"
+            docker build -t lookiero-java-app .
+            docker run -it --rm --name lookiero-running-app lookiero-java-app
             break
             ;;
         "Tests")
