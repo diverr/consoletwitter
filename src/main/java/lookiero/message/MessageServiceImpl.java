@@ -24,7 +24,7 @@ public class MessageServiceImpl implements MessageService {
     public List<Message> getUserWall(String userName) {
         User user = userRepository.findByName(userName).orElseThrow(() -> new IllegalArgumentException("User not found"));
 
-        List<String> users = user.getSubscriptions();
+        List<String> users = new ArrayList<>(user.getSubscriptions());
         users.add(user.getName());
 
         return messageRepository.getMessagesByOwnerIn(users);
