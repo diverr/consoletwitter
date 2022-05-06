@@ -10,6 +10,8 @@ import lookiero.user.UserService;
 import lookiero.user.UserServiceImpl;
 import lookiero.views.ConsoleIO;
 
+import java.util.Scanner;
+
 public class App {
     MessageRepository messageRepository;
     UserRepository userRepository;
@@ -32,14 +34,13 @@ public class App {
         MessageService messageService = new MessageServiceImpl(messageRepository, userRepository);
         UserService userService = new UserServiceImpl(userRepository);
 
-        IO io = new ConsoleIO();
+        IO io = new ConsoleIO(new Scanner(System.in));
 
-        new App(messageRepository, userRepository, messageService, userService, io).init();
+        OperationController operation = new OperationController(messageService, userService, io);
+        new App(messageRepository, userRepository, messageService, userService, io).init(operation);
     }
 
-    public void init() {
-        OperationController operation = new OperationController(messageService, userService, io);
-
+    public void init(OperationController operation) {
         operation.wellcome();
 
         while (operation.isRunning()) {

@@ -5,7 +5,11 @@ import lookiero.IO;
 import java.util.Scanner;
 
 public class ConsoleIO implements IO {
-    Scanner scanner = new Scanner(System.in);
+    Scanner scanner;
+
+    public ConsoleIO(Scanner scanner) {
+        this.scanner = scanner;
+    }
 
     @Override
     public void start() {
