@@ -18,5 +18,9 @@ public class User {
     public List<String> getSubscriptions() {
         return subscriptions;
     }
+
+    public void addSubscription(String subscription) {
+        subscriptions.add(subscription);
+    }
 }
 

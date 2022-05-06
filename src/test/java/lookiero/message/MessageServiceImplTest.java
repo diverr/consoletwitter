@@ -55,8 +55,8 @@ class MessageServiceImplTest {
         List<Message> result = messageService.getUserMessages("user1");
 
         verify(messageRepository).getMessagesByOwnerIn(List.of("user1"));
-        assertEquals(result, mockedResult);
-        assertEquals(result.size(), 1);
+        assertEquals(mockedResult, result);
+        assertEquals(1, result.size());
     }
 
     @Test
@@ -73,7 +73,7 @@ class MessageServiceImplTest {
 
         verify(userRepository).findByName("user1");
         verify(messageRepository).getMessagesByOwnerIn(argThat(list -> list.contains("user1") && list.contains("user2") && list.contains("user3")));
-        assertEquals(result, mockMessages);
+        assertEquals(mockMessages, result);
     }
 
     @Test

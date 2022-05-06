@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService {
         if (user.getSubscriptions().contains(followUserName)) {
             throw new RuntimeException(String.format("User %s already follows %s", userName, followUserName));
         } else {
-            user.getSubscriptions().add(followUserName);
+            user.addSubscription(followUserName);
         }
     }
 }
