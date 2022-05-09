@@ -57,7 +57,6 @@ class ConsoleIOTest {
     @DisplayName("Should print bye message and stop scanner")
     void stop() {
         consoleIO.stop();
-        assertEquals("Bye!\n", outContent.toString());
         verify(scanner).close();
     }
 

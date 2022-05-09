@@ -26,7 +26,7 @@ public class App {
         IO io = new ConsoleIO(new Scanner(System.in));
 
         OperationController operation = new OperationController(messageService, userService, io);
-        
+
         new App().init(operation);
     }
 
@@ -36,6 +36,8 @@ public class App {
         while (operation.isRunning()) {
             operation.listen();
         }
+
+        operation.bye();
 
     }
 

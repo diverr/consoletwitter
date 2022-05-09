@@ -76,7 +76,7 @@ public class OperationController {
     }
 
     private void wallCommand(String text) {
-        String userName = text.split(" ")[0];
+        String userName = getUserName(text);
 
         try {
             messageService.getUserWall(userName).forEach(message -> io.writeLine(StringUtils.parseWallMessage(message)));
@@ -86,7 +86,7 @@ public class OperationController {
     }
 
     private void followCommand(String text) {
-        String userName = text.split(STRING_COMMAND_FOLLOWS)[0];
+        String userName = getUserName(text);
         String followUserName = text.split(STRING_COMMAND_FOLLOWS)[1];
 
         try {
@@ -98,7 +98,7 @@ public class OperationController {
     }
 
     private void postCommand(String text) {
-        String userName = text.split(STRING_COMMAND_POST)[0];
+        String userName = getUserName(text);
         String message = text.split(STRING_COMMAND_POST)[1];
 
         try {
@@ -108,8 +108,21 @@ public class OperationController {
         }
     }
 
+    private String getUserName(String text) {
+        try {
+            return text.split(" ")[0].trim();
+        } catch (Exception e) {
+            io.writeLine("Error getting user name");
+        }
+        return "";
+    }
+
     public void welcome() {
         io.writeLine("Welcome to ConsoleTwitter! (type 'q' to quit)");
+    }
+
+    public void bye() {
+        io.writeLine("Bye!");
     }
 
     public boolean isRunning() {

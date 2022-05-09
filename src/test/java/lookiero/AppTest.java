@@ -31,5 +31,6 @@ class AppTest {
         verify(operationController).welcome();
         verify(operationController, times(2)).isRunning();
         verify(operationController, times(1)).listen();
+        verify(operationController).bye();
     }
 }

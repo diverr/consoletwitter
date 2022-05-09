@@ -22,7 +22,7 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public List<Message> getUserWall(String userName) {
-        User user = userRepository.findByName(userName).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        User user = userRepository.findByName(userName).orElseThrow(() -> new RuntimeException(String.format("User %s not found", userName)));
 
         List<String> users = new ArrayList<>(user.getSubscriptions());
         users.add(user.getName());
