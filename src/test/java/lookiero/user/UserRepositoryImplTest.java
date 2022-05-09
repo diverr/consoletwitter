@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockitoExtension.class)
 class UserRepositoryImplTest {
 
-    UserRepositoryImpl userRepository;
+    UserRepository userRepository;
 
     @BeforeEach
     void setUp() {

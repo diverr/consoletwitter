@@ -1,7 +1,7 @@
 package lookiero.message;
 
 import lookiero.user.User;
-import lookiero.user.UserRepositoryImpl;
+import lookiero.user.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,10 +33,10 @@ class MessageServiceImplTest {
     );
 
     @Mock
-    MessageRepositoryImpl messageRepository;
+    MessageRepository messageRepository;
 
     @Mock
-    UserRepositoryImpl userRepository;
+    UserRepository userRepository;
 
     MessageService messageService;
 

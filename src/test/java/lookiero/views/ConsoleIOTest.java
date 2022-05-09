@@ -1,5 +1,6 @@
 package lookiero.views;
 
+import lookiero.IO;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -26,7 +27,7 @@ class ConsoleIOTest {
     @Mock
     Scanner scanner;
 
-    ConsoleIO consoleIO;
+    IO consoleIO;
 
     @AfterAll
     static void restoreStreams() {

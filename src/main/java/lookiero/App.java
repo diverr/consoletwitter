@@ -13,18 +13,7 @@ import lookiero.views.ConsoleIO;
 import java.util.Scanner;
 
 public class App {
-    MessageRepository messageRepository;
-    UserRepository userRepository;
-    MessageService messageService;
-    UserService userService;
-    IO io;
-
-    public App(MessageRepository messageRepository, UserRepository userRepository, MessageService messageService, UserService userService, IO io) {
-        this.messageRepository = messageRepository;
-        this.userRepository = userRepository;
-        this.messageService = messageService;
-        this.userService = userService;
-        this.io = io;
+    public App() {
     }
 
     public static void main(String[] args) {
@@ -37,7 +26,8 @@ public class App {
         IO io = new ConsoleIO(new Scanner(System.in));
 
         OperationController operation = new OperationController(messageService, userService, io);
-        new App(messageRepository, userRepository, messageService, userService, io).init(operation);
+        
+        new App().init(operation);
     }
 
     public void init(OperationController operation) {

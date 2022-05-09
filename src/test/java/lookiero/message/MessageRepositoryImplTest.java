@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(MockitoExtension.class)
 class MessageRepositoryImplTest {
 
-    MessageRepositoryImpl messageRepository;
+    MessageRepository messageRepository;
 
     @BeforeEach
     void setUp() {

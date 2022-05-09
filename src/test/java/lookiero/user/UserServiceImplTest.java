@@ -20,9 +20,9 @@ import static org.mockito.Mockito.*;
 class UserServiceImplTest {
 
     @Mock
-    UserRepositoryImpl userRepository;
+    UserRepository userRepository;
 
-    UserServiceImpl userService;
+    UserService userService;
 
     @BeforeEach
     void setUp() {
