@@ -2,6 +2,7 @@ package lookiero.message;
 
 import lookiero.user.User;
 import lookiero.user.UserRepository;
+import lookiero.utils.TimeProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,29 +23,33 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class MessageServiceImplTest {
 
-    private final List<User> mockUsers = List.of(
-            new User("user1", List.of("user2", "user3")),
-            new User("user2", List.of()),
-            new User("user3", List.of("user1"))
-    );
-
-    private final List<Message> mockMessages = List.of(
-            new Message("user1", "message1"),
-            new Message("user2", "message2"),
-            new Message("user3", "message3")
-    );
-
+    @Mock
+    TimeProvider timeProvider;
     @Mock
     MessageRepository messageRepository;
-
     @Mock
     UserRepository userRepository;
-
     MessageService messageService;
+    private List<User> mockUsers;
+    private List<Message> mockMessages;
 
     @BeforeEach
     void setUp() {
-        messageService = new MessageServiceImpl(messageRepository, userRepository);
+        when(timeProvider.now()).thenReturn(Instant.now().minus(1, ChronoUnit.MINUTES));
+        
+        mockUsers = List.of(
+                new User("user1", List.of("user2", "user3")),
+                new User("user2", List.of()),
+                new User("user3", List.of("user1"))
+        );
+
+        mockMessages = List.of(
+                new Message("user1", "message1", timeProvider),
+                new Message("user2", "message2", timeProvider),
+                new Message("user3", "message3", timeProvider)
+        );
+
+        messageService = new MessageServiceImpl(messageRepository, userRepository, timeProvider);
     }
 
     @Test

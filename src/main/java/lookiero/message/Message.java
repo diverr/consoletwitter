@@ -1,16 +1,18 @@
 package lookiero.message;
 
-import java.time.LocalDateTime;
+import lookiero.utils.TimeProvider;
+
+import java.time.Instant;
 
 public class Message {
     private final String owner;
     private final String message;
-    private final LocalDateTime time;
+    private final Instant time;
 
-    public Message(String owner, String message) {
+    public Message(String owner, String message, TimeProvider timeProvider) {
         this.owner = owner;
         this.message = message;
-        this.time = LocalDateTime.now();
+        this.time = timeProvider.now();
     }
 
     public String getOwner() {
@@ -21,7 +23,7 @@ public class Message {
         return message;
     }
 
-    public LocalDateTime getTime() {
+    public Instant getTime() {
         return time;
     }
 }

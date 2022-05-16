@@ -2,7 +2,7 @@ package lookiero;
 
 import lookiero.message.MessageService;
 import lookiero.user.UserService;
-import lookiero.utils.StringUtils;
+import lookiero.utils.Parser;
 
 import java.util.regex.Pattern;
 
@@ -10,6 +10,7 @@ public class OperationController {
     private final MessageService messageService;
     private final UserService userService;
     private final IO io;
+    private final Parser parser;
 
     private final String STRING_COMMAND_POST = " -> ";
     private final String STRING_COMMAND_FOLLOWS = " follows ";
@@ -18,10 +19,11 @@ public class OperationController {
 
     private boolean running;
 
-    public OperationController(MessageService messageService, UserService userService, IO io) {
+    public OperationController(MessageService messageService, UserService userService, IO io, Parser parser) {
         this.messageService = messageService;
         this.userService = userService;
         this.io = io;
+        this.parser = parser;
 
         running = true;
     }
@@ -69,7 +71,7 @@ public class OperationController {
 
     private void readCommand(String text) {
         try {
-            messageService.getUserMessages(text).forEach(message -> io.writeLine(StringUtils.parseMessage(message)));
+            messageService.getUserMessages(text).forEach(message -> io.writeLine(parser.parseMessage(message)));
         } catch (Exception e) {
             io.writeLine(e.getMessage());
         }
@@ -79,7 +81,7 @@ public class OperationController {
         String userName = getUserName(text);
 
         try {
-            messageService.getUserWall(userName).forEach(message -> io.writeLine(StringUtils.parseWallMessage(message)));
+            messageService.getUserWall(userName).forEach(message -> io.writeLine(parser.parseWallMessage(message)));
         } catch (Exception e) {
             io.writeLine(e.getMessage());
         }
