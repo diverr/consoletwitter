@@ -27,13 +27,17 @@ public class Parser {
         long diff = timeProvider.now().getEpochSecond() - time.getEpochSecond();
 
         if (diff < MINUTE) {
-            return diff + " second/s ago";
+            return diff + String.format(" second%s ago", getPlural(diff));
         } else if (diff < HOUR) {
-            return diff / MINUTE + " minute/s ago";
+            return diff / MINUTE + String.format(" minute%s ago", getPlural(diff / MINUTE));
         } else if (diff < DAY) {
-            return diff / HOUR + " hour/s ago";
+            return diff / HOUR + String.format(" hour%s ago", getPlural(diff / HOUR));
         } else {
-            return diff / DAY + " day/s ago";
+            return diff / DAY + String.format(" day%s ago", getPlural(diff / DAY));
         }
+    }
+
+    private String getPlural(long n) {
+        return n > 1 ? "s" : "";
     }
 }
