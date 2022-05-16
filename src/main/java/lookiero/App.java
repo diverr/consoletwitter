@@ -8,6 +8,8 @@ import lookiero.user.UserRepository;
 import lookiero.user.UserRepositoryImpl;
 import lookiero.user.UserService;
 import lookiero.user.UserServiceImpl;
+import lookiero.utils.Parser;
+import lookiero.utils.TimeProvider;
 import lookiero.views.ConsoleIO;
 
 import java.util.Scanner;
@@ -20,12 +22,16 @@ public class App {
         MessageRepository messageRepository = new MessageRepositoryImpl();
         UserRepository userRepository = new UserRepositoryImpl();
 
-        MessageService messageService = new MessageServiceImpl(messageRepository, userRepository);
+        TimeProvider timeProvider = new TimeProvider();
+
+        MessageService messageService = new MessageServiceImpl(messageRepository, userRepository, timeProvider);
         UserService userService = new UserServiceImpl(userRepository);
 
         IO io = new ConsoleIO(new Scanner(System.in));
 
-        OperationController operation = new OperationController(messageService, userService, io);
+        Parser parser = new Parser(timeProvider);
+
+        OperationController operation = new OperationController(messageService, userService, io, parser);
 
         new App().init(operation);
     }

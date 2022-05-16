@@ -2,6 +2,7 @@ package lookiero;
 
 import lookiero.message.MessageService;
 import lookiero.user.UserService;
+import lookiero.utils.Parser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,11 +25,14 @@ class OperationControllerTest {
     @Mock
     IO io;
 
+    @Mock
+    Parser parser;
+
     OperationController operationController;
 
     @BeforeEach
     void setUp() {
-        operationController = new OperationController(messageService, userService, io);
+        operationController = new OperationController(messageService, userService, io, parser);
     }
 
     @Test

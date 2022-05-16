@@ -2,6 +2,7 @@ package lookiero.message;
 
 import lookiero.user.User;
 import lookiero.user.UserRepository;
+import lookiero.utils.TimeProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,10 +10,12 @@ import java.util.List;
 public class MessageServiceImpl implements MessageService {
     private final MessageRepository messageRepository;
     private final UserRepository userRepository;
+    private final TimeProvider timeProvider;
 
-    public MessageServiceImpl(MessageRepository messageRepository, UserRepository userRepository) {
+    public MessageServiceImpl(MessageRepository messageRepository, UserRepository userRepository, TimeProvider timeProvider) {
         this.messageRepository = messageRepository;
         this.userRepository = userRepository;
+        this.timeProvider = timeProvider;
     }
 
     @Override
@@ -37,7 +40,7 @@ public class MessageServiceImpl implements MessageService {
             userRepository.addUser(new User(owner, new ArrayList<>()));
         }
 
-        Message message = new Message(owner, text);
+        Message message = new Message(owner, text, timeProvider);
         messageRepository.addMessage(message);
     }
 }
