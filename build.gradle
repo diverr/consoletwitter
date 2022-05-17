@@ -19,7 +19,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'lookiero.App'
+    mainClass = 'consoletwitter.App'
 }
 
 test {

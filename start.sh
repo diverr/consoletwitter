@@ -8,14 +8,14 @@ do
         "Execute local project")
             clear
             ./gradlew shadowJar
-            java -jar ./build/libs/lookiero-1.0-SNAPSHOT-all.jar
+            java -jar ./build/libs/consoletwitter-1.0-SNAPSHOT-all.jar
             break
             ;;
         "Execute in docker")
             clear
             echo "Executing in openjdk:11 docker image"
-            docker build -t lookiero-java-app .
-            docker run -it --rm --name lookiero-running-app lookiero-java-app
+            docker build -t consoletwitter-java-app .
+            docker run -it --rm --name consoletwitter-running-app consoletwitter-java-app
             break
             ;;
         "Execute tests")
